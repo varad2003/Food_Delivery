@@ -80,6 +80,10 @@ public class Register extends AppCompatActivity {
                     StringRequest request=new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
                         @Override
                         public void onResponse(String response) {
+                            if(response.equals("exist")){
+                                Toast.makeText(Register.this, "email exists", Toast.LENGTH_SHORT).show();
+                            }
+                            else
                             Toast.makeText(Register.this, "Inserted", Toast.LENGTH_SHORT).show();
                         }
                     }, new Response.ErrorListener() {
