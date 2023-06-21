@@ -65,6 +65,7 @@ public class Register extends AppCompatActivity {
                 }
                 else{
 
+                    HttpsTrustManager.allowAllSSL();
                     StringRequest request=new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
                         @Override
                         public void onResponse(String response) {
