@@ -4,7 +4,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -21,6 +23,7 @@ import com.google.android.material.textfield.TextInputEditText;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 public class Register extends AppCompatActivity {
 
@@ -35,6 +38,8 @@ public class Register extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
+        Objects.requireNonNull(getSupportActionBar()).hide();
+
         signup=findViewById(R.id.txt_signup);
         signin=findViewById(R.id.txt_signin);
         firstname=findViewById(R.id.firstname);
@@ -43,7 +48,13 @@ public class Register extends AppCompatActivity {
         phone=findViewById(R.id.phone);
         password=findViewById(R.id.passowrd);
 
-
+        signin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(Register.this, Login.class));
+                finish();
+            }
+        });
         signup.setOnClickListener(new View.OnClickListener() {
             @Override
 
