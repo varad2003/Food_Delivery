@@ -31,7 +31,7 @@ public class Login extends AppCompatActivity {
     TextView signin,forgot_password;
     TextInputEditText email,password;
 
-    private final String url="https://192.168.1.10/android/login.php";
+    private final String url="https://192.168.1.5/android/login.php";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
