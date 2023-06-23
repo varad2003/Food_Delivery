@@ -28,8 +28,6 @@ public class MainActivity extends AppCompatActivity {
             public void run() {
                 Intent i = new Intent(MainActivity.this, Login.class);
                 startActivity(i);
-
-
                 finish();
             }
         }, 2000);

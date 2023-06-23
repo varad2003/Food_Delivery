@@ -53,7 +53,6 @@ public class Login extends AppCompatActivity {
 
         if(sharedpreferences.getBoolean(login_status,false)){
             startActivity(new Intent(Login.this,Marketplace.class));
-            Toast.makeText(this, sharedpreferences.getString("email",null), Toast.LENGTH_SHORT).show();
             finish();
         }
 
@@ -86,7 +85,6 @@ public class Login extends AppCompatActivity {
                                 editor.putBoolean(login_status,true);
                                 editor.putString("email",email.getText().toString().trim());
                                 editor.apply();
-                                editor.commit();
                                 startActivity(new Intent(Login.this,Marketplace.class));
                                 finish();
                             }

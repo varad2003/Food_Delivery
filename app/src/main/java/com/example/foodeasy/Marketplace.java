@@ -25,6 +25,8 @@ public class Marketplace extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_marketplace);
 
+        getSupportActionBar().hide();
+
         bottomNavigationView=findViewById(R.id.bottom_nav_view);
 
 
