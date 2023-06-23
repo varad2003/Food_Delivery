@@ -4,8 +4,10 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -31,7 +33,7 @@ public class Login extends AppCompatActivity {
     TextView signin,forgot_password;
     TextInputEditText email,password;
 
-    private final String url="https://192.168.1.5/android/login.php";
+    private final String url="https://192.168.1.2/android/login.php";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,6 +46,17 @@ public class Login extends AppCompatActivity {
         forgot_password=findViewById(R.id.fogotpassword);
         email=findViewById(R.id.email);
         password=findViewById(R.id.password);
+
+        final String login_status = "login_status" ;
+        SharedPreferences sharedpreferences = this.getSharedPreferences(login_status, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedpreferences.edit();
+
+        if(sharedpreferences.getBoolean(login_status,false)){
+            startActivity(new Intent(Login.this,Marketplace.class));
+            Toast.makeText(this, sharedpreferences.getString("email",null), Toast.LENGTH_SHORT).show();
+            finish();
+        }
+
 
         signup.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -70,6 +83,10 @@ public class Login extends AppCompatActivity {
                         @Override
                         public void onResponse(String response) {
                             if(Objects.equals(response, "success")){
+                                editor.putBoolean(login_status,true);
+                                editor.putString("email",email.getText().toString().trim());
+                                editor.apply();
+                                editor.commit();
                                 startActivity(new Intent(Login.this,Marketplace.class));
                                 finish();
                             }
