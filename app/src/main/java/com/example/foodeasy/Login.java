@@ -85,7 +85,6 @@ public class Login extends AppCompatActivity {
                                 editor.putBoolean(login_status,true);
                                 editor.putString("email",email.getText().toString().trim());
                                 editor.apply();
-                                editor.commit();
                                 startActivity(new Intent(Login.this,Marketplace.class));
                                 finish();
                             }

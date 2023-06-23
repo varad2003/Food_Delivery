@@ -43,11 +43,11 @@
                     android:textSize="@dimen/_22ssp"/>
 
                 <TextView
-                    android:id="@+id/title_fullname"
+                    android:id="@+id/first_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_5sdp"
-                    android:text="Full Name"
+                    android:text="First Name"
                     android:textSize="@dimen/_16ssp"/>
 
             </LinearLayout>
@@ -56,53 +56,7 @@
 
         </RelativeLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="-50dp"
-            android:layout_gravity="center"
-            android:padding="@dimen/_10sdp">
 
-            <com.google.android.material.card.MaterialCardView
-                android:layout_width="match_parent"
-                android:layout_weight="1"
-                app:cardBackgroundColor="#DFDFDF"
-                app:cardMaxElevation="@dimen/_10sdp"
-                android:layout_margin="@dimen/_10sdp"
-                app:cardCornerRadius="@dimen/_20sdp"
-                android:layout_height="wrap_content">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:padding="@dimen/_5sdp">
-
-                    <ImageView
-                        android:layout_width="@dimen/_30sdp"
-                        android:layout_height="@dimen/_30sdp"
-                        android:src="@drawable/history_icon"
-                        android:layout_gravity="center"/>
-
-
-                    <TextView
-                        android:id="@+id/orders"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Check Order History"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/_18sdp"
-                        android:layout_gravity="center"
-                        />
-
-
-
-                </LinearLayout>
-
-            </com.google.android.material.card.MaterialCardView>
-
-
-        </LinearLayout>
 
         <ScrollView
             android:layout_width="match_parent"
