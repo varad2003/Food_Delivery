@@ -137,6 +137,19 @@
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <TextView
+                    android:id="@+id/save_btn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/sign_in_btn"
+                    android:gravity="center"
+                    android:padding="@dimen/_10sdp"
+                    android:text="Save"
+                    android:visibility="gone"
+                    android:layout_marginTop="@dimen/_20sdp"
+                    android:textColor="@color/white"
+                    />
+
+                <TextView
                     android:id="@+id/update_btn"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
