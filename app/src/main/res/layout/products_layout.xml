@@ -19,27 +19,39 @@
             android:padding="@dimen/_5sdp"
             android:orientation="horizontal">
 
-            <ImageView
-                android:id="@+id/product_image"
-                android:layout_gravity="center_vertical"
-                android:layout_width="@dimen/_120sdp"
-                android:layout_height="@dimen/_150sdp"
-                android:src="@drawable/ic_launcher_background"/>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/product_image"
+                    android:layout_width="@dimen/_120sdp"
+                    android:layout_height="@dimen/_120sdp"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/ic_launcher_background"/>
+
+                <TextView
+                    android:id="@+id/product_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Name of product"
+                    android:textColor="@color/black"
+                    android:layout_gravity="center_horizontal"
+                    android:gravity="center_horizontal"
+                    android:textStyle="bold"
+                    android:textSize="@dimen/_17sdp"
+                  />
+
+            </LinearLayout>
+
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:gravity="center_vertical"
                 android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/product_name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Name of product"
-                    android:textColor="@color/black"
-                    android:textStyle="bold"
-                    android:textSize="@dimen/_17sdp"
-                    android:layout_marginLeft="@dimen/_15sdp"/>
 
                 <TextView
                     android:id="@+id/product_description"
@@ -67,19 +79,24 @@
                         android:textSize="@dimen/_15sdp"
                         android:layout_marginLeft="@dimen/_15sdp"/>
 
-                    <TextView
-                        android:id="@+id/addbtn"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_10sdp"
-                        android:text="Add"
-                        android:background="@color/purple_200"
-                        android:textStyle="bold"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/_15sdp"
-                        android:layout_marginLeft="@dimen/_15sdp"/>
 
                 </LinearLayout>
+
+                <TextView
+                    android:id="@+id/addbtn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:text="Add"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:padding="@dimen/_4sdp"
+                    android:textAlignment="center"
+                    android:background="@drawable/sign_in_btn"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_15sdp"
+                    />
 
 
             </LinearLayout>
