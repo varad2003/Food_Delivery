@@ -26,6 +26,10 @@ public class Product_adapter extends RecyclerView.Adapter<Product_adapter.Produc
        this.products=products;
    }
 
+//   public  void setFilterList(ArrayList<Product>filterList){
+//       this.products=filterList;
+//       notifyDataSetChanged();
+//   }
 
     @NonNull
     @Override
@@ -46,7 +50,6 @@ public class Product_adapter extends RecyclerView.Adapter<Product_adapter.Produc
     @Override
     public int getItemCount() {
         return products.size();
-
     }
 
     public class ProductViewHolder extends RecyclerView.ViewHolder{

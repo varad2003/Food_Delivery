@@ -41,8 +41,8 @@ import java.util.Objects;
 public class Profile_Fragment extends Fragment {
 
 //    String first_name,last_name,email,phone;
-    public final String apiurl="https://192.168.1.9/android/profile_data_fetch.php";
-    public final String url="https://192.168.1.9/android/update_profile.php";
+    public final String apiurl="https://192.168.1.4/android/profile_data_fetch.php";
+    public final String url="https://192.168.1.4/android/update_profile.php";
     TextInputEditText email,address,phone,full_name;
     TextView first_name;
 

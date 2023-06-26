@@ -1,14 +1,15 @@
 package com.example.foodeasy;
 
 public class Product {
-    private String name,description,image;
+    private String name,description,image,category;
     private double price;
     private int id;
 
-    public Product(String name, String description, String image, double price, int id) {
+    public Product(String name, String description, String image, String category, double price, int id) {
         this.name = name;
         this.description = description;
         this.image = image;
+        this.category = category;
         this.price = price;
         this.id = id;
     }
@@ -51,5 +52,13 @@ public class Product {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String  getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
     }
 }
