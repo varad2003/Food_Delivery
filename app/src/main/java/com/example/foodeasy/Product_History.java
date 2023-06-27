@@ -1,11 +1,11 @@
 package com.example.foodeasy;
 
 public class Product_History {
-    String name;
-    int id,count;
-    double price,total_amt;
+    private String name;
+   private int id,count;
+   private double price,total_amt;
 
-    public Product_History(String name, int id, int count, double price, double total_amt) {
+    public Product_History(String name, int id,int count,double price,double total_amt) {
         this.name = name;
         this.id = id;
         this.count = count;

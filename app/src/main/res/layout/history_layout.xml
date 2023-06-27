@@ -37,14 +37,15 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <ImageButton
-                android:id="@+id/add_btn"
+                android:id="@+id/remove_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintTop_toBottomOf="parent"
-                app:layout_constraintLeft_toRightOf="@id/product_name"
+                app:layout_constraintRight_toLeftOf="@id/count"
                 android:backgroundTint="@color/white"
-                android:src="@drawable/add_icon"/>
+                android:src="@drawable/remove_icon"
+                />
 
             <TextView
                 android:id="@+id/count"
@@ -52,31 +53,32 @@
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintLeft_toRightOf="@id/add_btn"
-                app:layout_constraintRight_toLeftOf="@id/remove_btn"
+                app:layout_constraintRight_toLeftOf="@id/add_btn"
                 android:text=" Count "
                 android:textStyle="bold"
                 android:textSize="@dimen/_14sdp"
                 android:textColor="@color/black"
                 />
 
+
             <ImageButton
-                android:id="@+id/remove_btn"
+                android:id="@+id/add_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintLeft_toRightOf="@id/count"
+                app:layout_constraintRight_toLeftOf="@id/twodots"
                 android:backgroundTint="@color/white"
-                android:src="@drawable/remove_icon"/>
+                android:src="@drawable/add_icon"/>
 
             <TextView
+                android:id="@+id/twodots"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text=" : "
+                android:text=":  "
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintLeft_toRightOf="@id/remove_btn"
+             app:layout_constraintRight_toLeftOf="@id/price"
                 android:textStyle="bold"
                 android:textColor="@color/black"
                 android:textSize="@dimen/_15sdp"
