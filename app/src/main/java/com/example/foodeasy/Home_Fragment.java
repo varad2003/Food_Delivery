@@ -24,20 +24,17 @@ import java.util.ArrayList;
 
 
 public class Home_Fragment extends Fragment {
-
     Product_adapter product_adapter;
     static  ArrayList<Product>products;
     ArrayList<Product>filterd_list;
-//    ActivityMarketplaceBinding binding;
     RecyclerView recyclerView;
     SearchView searchView;
 
-    public final String apiurl="https://192.168.1.4/android/product_data_fetch.php";
+    public final String apiurl="https://192.168.1.9/android/product_data_fetch.php";
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         View view= inflater.inflate(R.layout.fragment_home_, container, false);
 
         HttpsTrustManager.allowAllSSL();
@@ -107,23 +104,18 @@ public class Home_Fragment extends Fragment {
             }
         });
 
-
         return view;
     }
-
-
 
     private void initiateProducts(View view) {
 
         fetchproductdata(view);
     }
 
-
     private void fetchproductdata(View view) {
 
         class dbManager extends AsyncTask<String,Void,String>
         {
-
             protected void onPostExecute(String data)
             {
                 try{
@@ -143,13 +135,11 @@ public class Home_Fragment extends Fragment {
                     recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
                     recyclerView.setAdapter(product_adapter);
 
-
                 }catch (Exception ex)
                 {
                     Toast.makeText(getContext(),data,Toast.LENGTH_LONG).show();
                 }
             }
-
             @Override
             protected String doInBackground(String... strings) {
                 try{
@@ -165,15 +155,11 @@ public class Home_Fragment extends Fragment {
                         data.append(line+"\n");
                     }
                     br.close();
-
                     return data.toString();
-
                 }catch (Exception ex)
                 {
                     return ex.getMessage();
                 }
-
-
             }
         }
 

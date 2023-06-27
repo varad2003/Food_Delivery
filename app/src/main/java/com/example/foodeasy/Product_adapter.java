@@ -16,8 +16,6 @@ import java.util.ArrayList;
 
 public class Product_adapter extends RecyclerView.Adapter<Product_adapter.ProductViewHolder> {
 
-//   ProductsLayoutBinding binding;
-
    Context context;
    ArrayList<Product>products;
 
@@ -25,11 +23,6 @@ public class Product_adapter extends RecyclerView.Adapter<Product_adapter.Produc
        this.context=context;
        this.products=products;
    }
-
-//   public  void setFilterList(ArrayList<Product>filterList){
-//       this.products=filterList;
-//       notifyDataSetChanged();
-//   }
 
     @NonNull
     @Override
