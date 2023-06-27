@@ -12,8 +12,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -56,15 +54,15 @@ public class History_Fragment extends Fragment {
             public void onResponse(String response) {
                 try{
                     JSONArray ja=new JSONArray(response);
-                    ArrayList<Product_History>product_histories=new ArrayList<>();
+                    ArrayList<Product_Cart>product_histories=new ArrayList<>();
 
                     for(int i=0; i<ja.length(); i++){
                         JSONObject jo=ja.getJSONObject(i);
-                        Product_History product=new Product_History(jo.getString("name"),jo.getInt("id"),jo.getInt("count"),jo.getDouble("price"),0);
+                        Product_Cart product=new Product_Cart(jo.getString("name"),jo.getInt("id"),jo.getInt("count"),jo.getDouble("price"),0);
                         product_histories.add(product);
                     }
 
-                    Product_History_Adapter product_history_adapter=new Product_History_Adapter(getContext(),product_histories,total);
+                    Product_Cart_Adapter product_history_adapter=new Product_Cart_Adapter(getContext(),product_histories,total);
                     recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
                     recyclerView.setAdapter(product_history_adapter);
 

@@ -2,13 +2,9 @@ package com.example.foodeasy;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.renderscript.ScriptGroup;
-import android.text.NoCopySpan;
-import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,22 +19,20 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.bumptech.glide.Glide;
 import com.example.foodeasy.databinding.HistoryLayoutBinding;
-import com.example.foodeasy.databinding.ProductsLayoutBinding;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Product_History_Adapter extends RecyclerView.Adapter<Product_History_Adapter.ProductHistoryViewHolder>{
+public class Product_Cart_Adapter extends RecyclerView.Adapter<Product_Cart_Adapter.ProductHistoryViewHolder>{
 
     String apiurl="https://192.168.1.9/android/cart_update.php";
     Context context;
-    ArrayList<Product_History>product_histories;
+    ArrayList<Product_Cart>product_histories;
     TextView total;
 
-    public Product_History_Adapter(Context context, ArrayList<Product_History> product_histories,TextView total) {
+    public Product_Cart_Adapter(Context context, ArrayList<Product_Cart> product_histories, TextView total) {
         this.context = context;
         this.product_histories = product_histories;
         this.total=total;
@@ -52,7 +46,7 @@ public class Product_History_Adapter extends RecyclerView.Adapter<Product_Histor
 
     @Override
     public void onBindViewHolder(@NonNull ProductHistoryViewHolder holder, int position) {
-        Product_History product_history=product_histories.get(position);
+        Product_Cart product_history=product_histories.get(position);
         holder.binding.productName.setText(product_history.getName());
         holder.binding.price.setText(product_history.getPrice() *product_history.getCount()+"");
         holder.binding.count.setText(product_history.getCount()+"");
@@ -90,7 +84,7 @@ public class Product_History_Adapter extends RecyclerView.Adapter<Product_Histor
 
     }
 
-    private void resetdata(Product_History product) {
+    private void resetdata(Product_Cart product) {
 
         HttpsTrustManager.allowAllSSL();
         StringRequest request=new StringRequest(Request.Method.POST, apiurl, new Response.Listener<String>() {
@@ -126,7 +120,7 @@ public class Product_History_Adapter extends RecyclerView.Adapter<Product_Histor
 
     private void updatetotal() {
         double total_amount=0;
-        for(Product_History item:product_histories){
+        for(Product_Cart item:product_histories){
             total_amount=total_amount+(item.getPrice())*(item.getCount());
         }
         total.setText(total_amount+"");
