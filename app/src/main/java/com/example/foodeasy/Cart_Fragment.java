@@ -33,7 +33,7 @@ import java.util.Map;
 
 public class Cart_Fragment extends Fragment {
 
-    String apiurl="https://192.168.1.9/android/cart_fetch_data.php";
+    String apiurl="https://192.168.1.11/android/cart_fetch_data.php";
     RecyclerView recyclerView;
     TextView total;
     @Override
@@ -70,7 +70,7 @@ public class Cart_Fragment extends Fragment {
 
                 }catch (Exception ex)
                 {
-                    Toast.makeText(getContext(),response,Toast.LENGTH_LONG).show();
+//                    Toast.makeText(getContext(),response,Toast.LENGTH_LONG).show();
                 }
             }
         }, new Response.ErrorListener() {

@@ -27,7 +27,7 @@ import java.util.Map;
 
 public class Product_Cart_Adapter extends RecyclerView.Adapter<Product_Cart_Adapter.ProductHistoryViewHolder>{
 
-    String apiurl="https://192.168.1.9/android/cart_update.php";
+    String apiurl="https://192.168.1.11/android/cart_update.php";
     Context context;
     ArrayList<Product_Cart>product_histories;
     TextView total;
@@ -68,7 +68,7 @@ public class Product_Cart_Adapter extends RecyclerView.Adapter<Product_Cart_Adap
             @Override
             public void onClick(View view) {
                 product_history.setCount(product_history.getCount() - 1);
-                if( product_history.getCount() ==0){
+                if( product_history.getCount() <=0){
                     resetdata(product_history);
                     product_histories.remove(position);
                     notifyItemRemoved(position);

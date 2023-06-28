@@ -30,7 +30,7 @@ public class Home_Fragment extends Fragment {
     RecyclerView recyclerView;
     SearchView searchView;
 
-    public final String apiurl="https://192.168.1.9/android/product_data_fetch.php";
+    public final String apiurl="https://192.168.1.11/android/product_data_fetch.php";
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
