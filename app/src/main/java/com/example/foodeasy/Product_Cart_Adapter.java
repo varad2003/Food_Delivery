@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,15 +29,21 @@ import java.util.Map;
 public class Product_Cart_Adapter extends RecyclerView.Adapter<Product_Cart_Adapter.ProductHistoryViewHolder>{
 
     String apiurl="https://192.168.1.11/android/cart_update.php";
+    String url="https://192.168.1.11/android/order_history_add.php";
     Context context;
     ArrayList<Product_Cart>product_histories;
     TextView total;
+    LinearLayout checkout;
 
-    public Product_Cart_Adapter(Context context, ArrayList<Product_Cart> product_histories, TextView total) {
+
+    public Product_Cart_Adapter(Context context, ArrayList<Product_Cart> product_histories, TextView total, LinearLayout checout) {
         this.context = context;
         this.product_histories = product_histories;
         this.total=total;
+        this.checkout=checout;
+        HttpsTrustManager.allowAllSSL();
     }
+
 
     @NonNull
     @Override
@@ -51,6 +58,40 @@ public class Product_Cart_Adapter extends RecyclerView.Adapter<Product_Cart_Adap
         holder.binding.price.setText(product_history.getPrice() *product_history.getCount()+"");
         holder.binding.count.setText(product_history.getCount()+"");
         updatetotal();
+
+        checkout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                StringRequest request=new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                            Toast.makeText(context, response, Toast.LENGTH_SHORT).show();
+                    }
+                }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(context, error.toString(), Toast.LENGTH_LONG).show();
+                    }
+                }
+                ){
+                    @Nullable
+                    @Override
+                    protected Map<String, String> getParams() throws AuthFailureError {
+                        final String login_status = "login_status" ;
+                        SharedPreferences sharedpreferences = context.getSharedPreferences(login_status, Context.MODE_PRIVATE);
+                        String user_mail= sharedpreferences.getString("email",null);
+                        Map<String,String> map=new HashMap<String,String>();
+                        map.put("email",user_mail);
+                        map.put("total_amount",total.getText()+"");
+
+                        return map;
+
+                    }
+                };
+                RequestQueue queue= Volley.newRequestQueue(context);
+                queue.add(request);
+            }
+        });
 
         holder.binding.addBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -86,7 +127,6 @@ public class Product_Cart_Adapter extends RecyclerView.Adapter<Product_Cart_Adap
 
     private void resetdata(Product_Cart product) {
 
-        HttpsTrustManager.allowAllSSL();
         StringRequest request=new StringRequest(Request.Method.POST, apiurl, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {

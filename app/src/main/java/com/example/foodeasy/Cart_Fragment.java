@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -36,6 +37,8 @@ public class Cart_Fragment extends Fragment {
     String apiurl="https://192.168.1.11/android/cart_fetch_data.php";
     RecyclerView recyclerView;
     TextView total;
+
+    LinearLayout checkout;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -44,11 +47,12 @@ public class Cart_Fragment extends Fragment {
         HttpsTrustManager.allowAllSSL();
         recyclerView=view.findViewById(R.id.history_recycler_view);
         total=view.findViewById(R.id.total_amt);
-        fetchdata(view,total);
+        checkout=view.findViewById(R.id.checkout);
+        fetchdata(view,total,checkout);
         return view;
     }
 
-    private void fetchdata(View view,TextView total) {
+    private void fetchdata(View view,TextView total,LinearLayout checkout) {
         StringRequest request=new StringRequest(Request.Method.POST, apiurl, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -62,7 +66,7 @@ public class Cart_Fragment extends Fragment {
                         product_histories.add(product);
                     }
 
-                    Product_Cart_Adapter product_history_adapter=new Product_Cart_Adapter(getContext(),product_histories,total);
+                    Product_Cart_Adapter product_history_adapter=new Product_Cart_Adapter(getContext(),product_histories,total,checkout);
                     recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
                     recyclerView.setAdapter(product_history_adapter);
 
