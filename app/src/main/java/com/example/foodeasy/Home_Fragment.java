@@ -30,7 +30,7 @@ public class Home_Fragment extends Fragment {
     RecyclerView recyclerView;
     SearchView searchView;
 
-    public final String apiurl="https://192.168.1.11/android/product_data_fetch.php";
+    public final String apiurl="https://192.168.43.221/android/product_data_fetch.php";
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -129,8 +129,6 @@ public class Home_Fragment extends Fragment {
                         jo=ja.getJSONObject(i);
                         Product product=new Product(jo.getString("name"), jo.getString("description"),jo.getString("image"), jo.getString("category"), jo.getDouble("price"),jo.getInt("id") );
                         products.add(product);
-                        System.out.println(products.size());
-                        System.out.println(product.getName());
                     }
                     product_adapter=new Product_adapter(getContext(),products);
                     recyclerView=view.findViewById(R.id.product_recycler_view);

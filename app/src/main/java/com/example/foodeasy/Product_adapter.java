@@ -1,5 +1,6 @@
 package com.example.foodeasy;
 
+import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -11,6 +12,9 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.AuthFailureError;
@@ -32,7 +36,7 @@ public class Product_adapter extends RecyclerView.Adapter<Product_adapter.Produc
    Context context;
    ArrayList<Product>products;
 
-   String apiurl="https://192.168.1.11/android/cart_add_data.php";
+   String apiurl="https://192.168.43.221/android/cart_add_data.php";
 
    public Product_adapter(Context context,ArrayList<Product>products){
        this.context=context;
@@ -60,7 +64,6 @@ public class Product_adapter extends RecyclerView.Adapter<Product_adapter.Produc
                     @Override
                     public void onResponse(String response) {
                         Toast.makeText(context, response, Toast.LENGTH_SHORT).show();
-
                     }
                 }, new Response.ErrorListener() {
                     @Override

@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.AuthFailureError;
@@ -28,8 +29,8 @@ import java.util.Map;
 
 public class Product_Cart_Adapter extends RecyclerView.Adapter<Product_Cart_Adapter.ProductHistoryViewHolder>{
 
-    String apiurl="https://192.168.1.11/android/cart_update.php";
-    String url="https://192.168.1.11/android/order_history_add.php";
+    String apiurl="https://192.168.43.221/android/cart_update.php";
+    String url="https://192.168.43.221/android/order_history_add.php";
     Context context;
     ArrayList<Product_Cart>product_histories;
     TextView total;
@@ -65,7 +66,11 @@ public class Product_Cart_Adapter extends RecyclerView.Adapter<Product_Cart_Adap
                 StringRequest request=new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                            Toast.makeText(context, response, Toast.LENGTH_SHORT).show();
+                        ((FragmentActivity)view.getContext()).getSupportFragmentManager()
+                                .beginTransaction()
+                                .replace(R.id.container, new Home_Fragment()).addToBackStack(null)
+                                .commit();
+                        Toast.makeText(context, "Delivered Soon", Toast.LENGTH_SHORT).show();
                     }
                 }, new Response.ErrorListener() {
                     @Override
