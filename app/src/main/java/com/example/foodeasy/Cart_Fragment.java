@@ -43,7 +43,7 @@ public class Cart_Fragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View view= inflater.inflate(R.layout.fragment_history_, container, false);
+        View view= inflater.inflate(R.layout.fragment_cart_, container, false);
         HttpsTrustManager.allowAllSSL();
         recyclerView=view.findViewById(R.id.history_recycler_view);
         total=view.findViewById(R.id.total_amt);

@@ -35,68 +35,35 @@ import java.util.Map;
 public class History_Fragment extends Fragment {
 
     String apiurl="https://192.168.43.221/android/cart_fetch_data.php";
+
     RecyclerView recyclerView;
-    TextView total;
-    LinearLayout checkout;
+    Product_History_Adapter product_history_adapter;
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
         View view= inflater.inflate(R.layout.fragment_history_, container, false);
         HttpsTrustManager.allowAllSSL();
+
         recyclerView=view.findViewById(R.id.history_recycler_view);
-        total=view.findViewById(R.id.total_amt);
-        checkout=view.findViewById(R.id.checkout);
-        fetchdata(view,total,checkout);
+
+        ArrayList<Product_History>product_histories=new ArrayList<>();
+        product_histories.add(new Product_History( "name",  "date_and_time",  2, 200.0 ));
+        product_histories.add(new Product_History( "name",  "date_and_time",  2, 200.0 ));
+        product_histories.add(new Product_History( "name",  "date_and_time",  2, 200.0 ));
+        product_histories.add(new Product_History( "name",  "date_and_time",  2, 200.0 ));
+
+
+
+        product_history_adapter=new Product_History_Adapter(getContext(),product_histories);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerView.setAdapter(product_history_adapter);
+
+
         return view;
     }
 
-    private void fetchdata(View view,TextView total,LinearLayout checkout) {
-        StringRequest request=new StringRequest(Request.Method.POST, apiurl, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                try{
-                    JSONArray ja=new JSONArray(response);
-                    ArrayList<Product_Cart>product_histories=new ArrayList<>();
 
-                    for(int i=0; i<ja.length(); i++){
-                        JSONObject jo=ja.getJSONObject(i);
-                        Product_Cart product=new Product_Cart(jo.getString("name"),jo.getInt("id"),jo.getInt("count"),jo.getDouble("price"),0);
-                        product_histories.add(product);
-                    }
-
-                    Product_Cart_Adapter product_history_adapter=new Product_Cart_Adapter(getContext(),product_histories,total,checkout);
-                    recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-                    recyclerView.setAdapter(product_history_adapter);
-
-
-
-                }catch (Exception ex)
-                {
-                    Toast.makeText(getContext(),response,Toast.LENGTH_LONG).show();
-                }
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-
-                Toast.makeText(getContext(), error.toString(), Toast.LENGTH_SHORT).show();
-            }
-        }
-        ){
-            @Nullable
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String,String> map=new HashMap<String,String>();
-                final String login_status = "login_status" ;
-                SharedPreferences sharedpreferences = getContext().getSharedPreferences(login_status, Context.MODE_PRIVATE);
-                String user_mail= sharedpreferences.getString("email",null);
-                map.put("email",user_mail);
-                return map;
-
-            }
-        };
-        RequestQueue queue= Volley.newRequestQueue(getContext());
-        queue.add(request);
-    }
 }
