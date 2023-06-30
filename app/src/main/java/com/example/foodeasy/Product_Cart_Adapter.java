@@ -21,7 +21,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.foodeasy.databinding.HistoryLayoutBinding;
+import com.example.foodeasy.databinding.CartLayoutBinding;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -49,7 +49,7 @@ public class Product_Cart_Adapter extends RecyclerView.Adapter<Product_Cart_Adap
     @NonNull
     @Override
     public ProductHistoryViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new ProductHistoryViewHolder(LayoutInflater.from(context).inflate(R.layout.history_layout,parent,false));
+        return new ProductHistoryViewHolder(LayoutInflater.from(context).inflate(R.layout.cart_layout,parent,false));
     }
 
     @Override
@@ -178,10 +178,10 @@ public class Product_Cart_Adapter extends RecyclerView.Adapter<Product_Cart_Adap
 
     public class ProductHistoryViewHolder extends RecyclerView.ViewHolder{
 
-        HistoryLayoutBinding binding;
+        CartLayoutBinding binding;
         public ProductHistoryViewHolder(@NonNull View itemView) {
             super(itemView);
-            binding= HistoryLayoutBinding.bind(itemView);
+            binding= CartLayoutBinding.bind(itemView);
         }
     }
 
