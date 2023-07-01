@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,51 +30,59 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+public class Products_order_history_fragment extends Fragment {
 
-public class History_Fragment extends Fragment {
-
-    String apiurl="https://192.168.24.186/android/order_history_data_fetch.php";
-
+    String apiurl="https://192.168.24.186/android/Products_in_history.php";
     RecyclerView recyclerView;
-    Product_History_Adapter product_history_adapter;
+    TextView date_and_time,total;
+    int order_id;
 
+    double total_amt;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        View view= inflater.inflate(R.layout.fragment_products_order_history_fragment, container, false);
+        recyclerView=view.findViewById(R.id.recycler_view);
+        date_and_time=view.findViewById(R.id.date_and_time);
+        total=view.findViewById(R.id.total_amt);
 
-        View view= inflater.inflate(R.layout.fragment_history_, container, false);
-        HttpsTrustManager.allowAllSSL();
+        Bundle arguments = getArguments();
+        if (arguments!=null){
+            order_id= (int)arguments.get("order_id");
+            total.setText(arguments.get("total_amt").toString());
+            date_and_time.setText(arguments.get("date_and_time").toString());
+        }
+        else{
+            total.setText("");
+            date_and_time.setText("");
+        }
 
-        recyclerView=view.findViewById(R.id.history_recycler_view);
-
-
-        fetchdata(view);
+        fetchdata();
 
         return view;
     }
 
-    private void fetchdata(View view) {
+    private void fetchdata() {
         StringRequest request=new StringRequest(Request.Method.POST, apiurl, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 try{
                     JSONArray ja=new JSONArray(response);
                     JSONObject jo=null;
-
-                    ArrayList<Product_History>product_histories=new ArrayList<>();
+                    ArrayList<Product_history_sample>product_history_samples=new ArrayList<>();
 
                     for(int i=0; i<ja.length(); i++){
                         jo=ja.getJSONObject(i);
-                        product_histories.add(new Product_History(jo.getString("date_and_time"),jo.getDouble("total_amount"),jo.getInt("order_id")));
+                        product_history_samples.add(new Product_history_sample(jo.getString("product_name"),jo.getInt("product_count"),jo.getDouble("price")));
                     }
-                    product_history_adapter=new Product_History_Adapter(getContext(),product_histories);
+                    Product_history_sample_adapter product_history_sample_adapter=new Product_history_sample_adapter(getContext(),product_history_samples);
                     recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-                    recyclerView.setAdapter(product_history_adapter);
+                    recyclerView.setAdapter(product_history_sample_adapter);
 
                 }catch (Exception ex)
                 {
-                    System.out.println(response);
                     Toast.makeText(getContext(),response,Toast.LENGTH_LONG).show();
                 }
             }
@@ -90,20 +97,13 @@ public class History_Fragment extends Fragment {
             @Nullable
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
-                final String login_status = "login_status" ;
-                SharedPreferences sharedpreferences = getContext().getSharedPreferences(login_status, Context.MODE_PRIVATE);
-                String user_mail= sharedpreferences.getString("email",null);
-
                 Map<String,String> map=new HashMap<String,String>();
-                map.put("email",user_mail);
+                map.put("order_id",order_id+"");
                 return map;
 
             }
         };
         RequestQueue queue= Volley.newRequestQueue(getContext());
         queue.add(request);
-
     }
-
-
 }

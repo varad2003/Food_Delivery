@@ -31,7 +31,7 @@ public class Register extends AppCompatActivity {
     LinearLayout signin;
     TextInputEditText firstname,lastname,email,phone,password;
 
-    private final String url="https://192.168.1.9/android/register.php";
+    private final String url="https://192.168.24.186/android/register.php";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
