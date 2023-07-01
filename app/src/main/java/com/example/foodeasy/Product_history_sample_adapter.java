@@ -42,7 +42,7 @@ public class Product_history_sample_adapter extends RecyclerView.Adapter<Product
         Product_history_sample product=arrayList.get(position);
         holder.binding.count.setText(product.getCount()+"");
         holder.binding.productName.setText(product.getName());
-        holder.binding.price.setText(product.getPrice()+"");
+        holder.binding.price.setText(product.getPrice()*product.getCount()+"");
     }
 
     @Override

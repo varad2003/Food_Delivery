@@ -34,7 +34,7 @@ import java.util.Map;
 
 public class History_Fragment extends Fragment {
 
-    String apiurl="https://192.168.24.186/android/cart_fetch_data.php";
+    String apiurl="https://192.168.24.186/android/order_history_data_fetch.php";
 
     RecyclerView recyclerView;
     Product_History_Adapter product_history_adapter;
@@ -49,20 +49,59 @@ public class History_Fragment extends Fragment {
 
         recyclerView=view.findViewById(R.id.history_recycler_view);
 
-        ArrayList<Product_History>product_histories=new ArrayList<>();
-        product_histories.add(new Product_History( "name",  "date_and_time",  2, 200.0 ));
-        product_histories.add(new Product_History( "name",  "date_and_time",  2, 200.0 ));
-        product_histories.add(new Product_History( "name",  "date_and_time",  2, 200.0 ));
-        product_histories.add(new Product_History( "name",  "date_and_time",  2, 200.0 ));
-
-
-
-        product_history_adapter=new Product_History_Adapter(getContext(),product_histories);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        recyclerView.setAdapter(product_history_adapter);
-
+        fetchdata(view);
 
         return view;
+    }
+
+    private void fetchdata(View view) {
+        StringRequest request=new StringRequest(Request.Method.POST, apiurl, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try{
+                    JSONArray ja=new JSONArray(response);
+                    JSONObject jo=null;
+
+                    ArrayList<Product_History>product_histories=new ArrayList<>();
+
+                    for(int i=0; i<ja.length(); i++){
+                        jo=ja.getJSONObject(i);
+                        product_histories.add(new Product_History(jo.getString("date_and_time"),jo.getDouble("total_amount"),jo.getInt("order_id")));
+                    }
+                    product_history_adapter=new Product_History_Adapter(getContext(),product_histories);
+                    recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+                    recyclerView.setAdapter(product_history_adapter);
+
+                }catch (Exception ex)
+                {
+                    System.out.println(response);
+                    Toast.makeText(getContext(),response,Toast.LENGTH_LONG).show();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+                Toast.makeText(getContext(), error.toString(), Toast.LENGTH_SHORT).show();
+            }
+        }
+        ){
+            @Nullable
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                final String login_status = "login_status" ;
+                SharedPreferences sharedpreferences = getContext().getSharedPreferences(login_status, Context.MODE_PRIVATE);
+                String user_mail= sharedpreferences.getString("email",null);
+
+                Map<String,String> map=new HashMap<String,String>();
+                map.put("email",user_mail);
+                return map;
+
+            }
+        };
+        RequestQueue queue= Volley.newRequestQueue(getContext());
+        queue.add(request);
+
     }
 
 

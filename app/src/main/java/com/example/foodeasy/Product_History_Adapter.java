@@ -1,6 +1,7 @@
 package com.example.foodeasy;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -44,9 +45,19 @@ public class Product_History_Adapter extends RecyclerView.Adapter<Product_Histor
        holder.binding.orderHistoryBtn.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View view) {
+
+               Bundle bundle=new Bundle();
+               bundle.putString("date_and_time",product_history.getDate_and_time());
+               bundle.putDouble("total_amt",product_history.getTotal());
+               bundle.putInt("order_id",product_history.getOrder_id());
+
+               Products_order_history_fragment products_order_history_fragment=new Products_order_history_fragment();
+               products_order_history_fragment.setArguments(bundle);
+
+
                ((FragmentActivity)view.getContext()).getSupportFragmentManager()
                        .beginTransaction()
-                       .replace(R.id.container, new Products_order_history_fragment()).addToBackStack(null)
+                       .replace(R.id.container, products_order_history_fragment).addToBackStack(null)
                        .commit();
            }
        });
