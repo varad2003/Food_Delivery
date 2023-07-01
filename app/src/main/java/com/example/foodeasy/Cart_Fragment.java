@@ -34,7 +34,7 @@ import java.util.Map;
 
 public class Cart_Fragment extends Fragment {
 
-    String apiurl="https://192.168.43.221/android/cart_fetch_data.php";
+    String apiurl="https://192.168.24.186/android/cart_fetch_data.php";
     RecyclerView recyclerView;
     TextView total;
 

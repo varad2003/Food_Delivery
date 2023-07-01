@@ -29,8 +29,8 @@ import java.util.Map;
 
 public class Product_Cart_Adapter extends RecyclerView.Adapter<Product_Cart_Adapter.ProductHistoryViewHolder>{
 
-    String apiurl="https://192.168.43.221/android/cart_update.php";
-    String url="https://192.168.43.221/android/order_history_add.php";
+    String apiurl="https://192.168.24.186/android/cart_update.php";
+    String url="https://192.168.24.186/android/order_history_add.php";
     Context context;
     ArrayList<Product_Cart>product_histories;
     TextView total;

@@ -6,8 +6,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 
@@ -20,12 +22,10 @@ public class Product_History_Adapter extends RecyclerView.Adapter<Product_Histor
     Context context;
     ArrayList<Product_History>product_histories;
 
-//    ArrayList<Product_history_sample>product_history_samples;
 
     public Product_History_Adapter(Context context, ArrayList<Product_History>product_histories){
         this.context=context;
         this.product_histories=product_histories;
-//        this.product_history_samples=product_history_samples;
         HttpsTrustManager.allowAllSSL();
     }
 
@@ -39,21 +39,17 @@ public class Product_History_Adapter extends RecyclerView.Adapter<Product_Histor
     public void onBindViewHolder(@NonNull ProductHistoryViewHolder holder, int position) {
        Product_History product_history=product_histories.get(position);
 
-//       ArrayList<Product_history_sample>productHistorySamples=new ArrayList<>();
-//       productHistorySamples.add(new Product_history_sample("Pizza",1));
-//       productHistorySamples.add(new Product_history_sample("Pizza",1));
-//       productHistorySamples.add(new Product_history_sample("Pizza",1));
-
-        ArrayList<String>arrayList=new ArrayList<>();
-        arrayList.add("Pizza");
-        arrayList.add("burger");
-        arrayList.add("fries");
-
-//       Product_history_sample_adapter product_history_sample_adapter=new Product_history_sample_adapter(context,productHistorySamples);
-        ArrayAdapter adapter=new ArrayAdapter(context, android.R.layout.simple_list_item_1,arrayList);
-       holder.binding.prevOrderLv.setAdapter(adapter);
        holder.binding.dateAndTime.setText(product_history.getDate_and_time());
        holder.binding.totalAmt.setText(product_history.getTotal()+"");
+       holder.binding.orderHistoryBtn.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View view) {
+               ((FragmentActivity)view.getContext()).getSupportFragmentManager()
+                       .beginTransaction()
+                       .replace(R.id.container, new Products_order_history_fragment()).addToBackStack(null)
+                       .commit();
+           }
+       });
     }
 
     @Override

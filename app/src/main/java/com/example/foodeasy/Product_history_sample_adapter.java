@@ -10,43 +10,55 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.foodeasy.databinding.CartLayoutBinding;
+import com.example.foodeasy.databinding.PrductsInHistoryListviewBinding;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Product_history_sample_adapter extends ArrayAdapter<Product_history_sample> {
+public class Product_history_sample_adapter extends RecyclerView.Adapter<Product_history_sample_adapter.ProductHistoryViewHolder>{
     Context context;
-    ArrayList<Product_history_sample>product_history_samples;
+//    TextView total,date_and_time;
+    ArrayList<Product_history_sample>arrayList;
 
-    public Product_history_sample_adapter(@NonNull Context context, ArrayList<Product_history_sample> arrayList) {
-
-        // pass the context and arrayList for the super
-        // constructor of the ArrayAdapter class
-        super(context, 0, arrayList);
-        this.context=context;
-        this.product_history_samples=arrayList;
-
+    public Product_history_sample_adapter(Context context,  ArrayList<Product_history_sample> arrayList) {
+        this.context = context;
+//        this.total = total;
+//        this.date_and_time = date_and_time;
+        this.arrayList = arrayList;
+        HttpsTrustManager.allowAllSSL();
     }
 
-    public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+    @NonNull
+    @Override
+    public ProductHistoryViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        return new ProductHistoryViewHolder(LayoutInflater.from(context).inflate(R.layout.prducts_in_history_listview,parent,false));
+    }
 
-        // convertView which is recyclable view
-        View currentItemView = convertView;
+    @Override
+    public void onBindViewHolder(@NonNull ProductHistoryViewHolder holder, int position) {
+        Product_history_sample product=arrayList.get(position);
+        holder.binding.count.setText(product.getCount()+"");
+        holder.binding.productName.setText(product.getName());
+        holder.binding.price.setText(product.getPrice()+"");
+    }
 
-        if (currentItemView == null) {
-            currentItemView = LayoutInflater.from(getContext()).inflate(R.layout.prducts_in_history_listview, parent, false);
+    @Override
+    public int getItemCount() {
+        return arrayList.size();
+    }
+
+    public class ProductHistoryViewHolder extends RecyclerView.ViewHolder{
+
+        PrductsInHistoryListviewBinding binding;
+        public ProductHistoryViewHolder(@NonNull View itemView) {
+            super(itemView);
+            binding= PrductsInHistoryListviewBinding.bind(itemView);
         }
-
-        Product_history_sample currentNumberPosition = getItem(position);
-
-        assert convertView != null;
-        TextView product_name=convertView.findViewById(R.id.product_name);
-        product_name.setText(currentNumberPosition.getName());
-        TextView count=convertView.findViewById(R.id.count);
-        count.setText(currentNumberPosition.getCount()+"");
-
-        return currentItemView;
     }
+
 }
 
 

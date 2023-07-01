@@ -28,10 +28,17 @@
             android:layout_marginTop="@dimen/_10sdp"
             android:orientation="vertical">
 
-            <ListView
-                android:id="@+id/prev_order_lv"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_100sdp" />
+            <TextView
+                android:id="@+id/order_history_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Order History"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_16ssp"
+                android:layout_marginHorizontal="@dimen/_10sdp"
+                android:background="@drawable/sign_in_btn"
+                android:paddingHorizontal="@dimen/_5sdp"
+                android:textAlignment="center"/>
 
             <View
                 android:layout_marginTop="@dimen/_5sdp"

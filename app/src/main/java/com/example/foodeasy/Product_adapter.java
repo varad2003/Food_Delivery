@@ -36,7 +36,7 @@ public class Product_adapter extends RecyclerView.Adapter<Product_adapter.Produc
    Context context;
    ArrayList<Product>products;
 
-   String apiurl="https://192.168.43.221/android/cart_add_data.php";
+   String apiurl="https://192.168.24.186/android/cart_add_data.php";
 
    public Product_adapter(Context context,ArrayList<Product>products){
        this.context=context;
