@@ -23,6 +23,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -48,6 +49,8 @@ public class Cart_Fragment extends Fragment {
         recyclerView=view.findViewById(R.id.history_recycler_view);
         total=view.findViewById(R.id.total_amt);
         checkout=view.findViewById(R.id.checkout);
+
+
         fetchdata(view,total,checkout);
         return view;
     }

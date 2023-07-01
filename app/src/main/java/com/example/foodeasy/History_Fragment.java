@@ -49,6 +49,7 @@ public class History_Fragment extends Fragment {
 
         recyclerView=view.findViewById(R.id.history_recycler_view);
 
+
         fetchdata(view);
 
         return view;

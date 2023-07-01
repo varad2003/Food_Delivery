@@ -22,23 +22,45 @@
             app:strokeWidth="@dimen/_1sdp"
             >
 
+
+
         <LinearLayout
+            android:id="@+id/order_history_btn"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="@dimen/_10sdp"
             android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/order_history_btn"
-                android:layout_width="wrap_content"
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Order History"
-                android:textColor="@color/white"
-                android:textSize="@dimen/_16ssp"
-                android:layout_marginHorizontal="@dimen/_10sdp"
-                android:background="@drawable/sign_in_btn"
-                android:paddingHorizontal="@dimen/_5sdp"
-                android:textAlignment="center"/>
+                android:layout_marginVertical="@dimen/_10sdp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start"
+                    android:gravity="start"
+                    android:text="View Details"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:textColor="#4860E6"
+                    android:textSize="@dimen/_16ssp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Delivered"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:textColor="#39FB41"
+                    android:textSize="@dimen/_16ssp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <View
                 android:layout_marginTop="@dimen/_5sdp"
